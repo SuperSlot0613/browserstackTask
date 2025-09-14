@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'playwright_migration'
-        CONTAINER_NAME = 'playwright_migration_container'
+        IMAGE_NAME = 'BowserStackTask'
+        CONTAINER_NAME = 'BowserStackTask_container'
     }
 
     stages {
