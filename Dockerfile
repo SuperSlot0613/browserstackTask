@@ -18,5 +18,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 ENV PYTHONPATH=/BowserStackTask
 
-CMD ["pytest", "-s","-v"]
+CMD ["pytest", "-v", "-s", "--alluredir=allure-results"]
 #CMD ["bash", "-c", "playwright install chromium --with-deps && python CC_Script/MainPy.py"]

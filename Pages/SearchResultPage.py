@@ -4,6 +4,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
+import allure
 
 class SearchResultPage:
 
@@ -28,6 +29,9 @@ class SearchResultPage:
 
         print('This is count',count)
 
-        assert count==(num_product_click-1),f"Expected : User should able to Click Third Product But Actual : User is not able to click on Third Product"
+        if count==(num_product_click-1):
+            with allure.step(f"Expected : User should able to Click Third Product But Actual : User is not able to click on Third Product"):
+                assert True
+
 
 

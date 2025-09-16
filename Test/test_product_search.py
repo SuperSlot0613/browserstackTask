@@ -1,10 +1,12 @@
 from Pages.HomePage import HomePage
 from Pages.SearchResultPage import SearchResultPage
 from Pages.ProductViewDetail import ProductViewDetail
-
+import allure
 
 
 # This test method test the Search,resukt check and Product detail fetch Functionality
+@allure.feature("Product")
+@allure.story("Successfully Validated Product")
 def test_product_validation_of_third_product(driver):
     home_page=HomePage(driver)
     search_result=SearchResultPage(driver)
