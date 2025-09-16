@@ -8,14 +8,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 @pytest.fixture
 def driver():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")  # or "--headless"
-    options.add_argument("--no-sandbox")  # important for Docker
-    options.add_argument("--disable-dev-shm-usage")  # prevents crashes
-    options.add_argument("--disable-gpu")  # safe for headless
-    options.add_argument("--disable-software-rasterizer")
-    options.add_argument("--remote-debugging-port=9222")
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service("/usr/bin/chromedriver"), options=options)
     driver.maximize_window()
     driver.implicitly_wait(10)
     driver.get('https://www.amazon.in/')
