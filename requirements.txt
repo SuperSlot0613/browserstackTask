@@ -2,3 +2,4 @@ pytest
 selenium
 urllib3
 allure-pytest
+webdriver_manager
