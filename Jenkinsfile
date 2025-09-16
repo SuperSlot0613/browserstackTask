@@ -35,13 +35,13 @@ pipeline {
 
                   # run pytest with allure plugin inside container
                   docker run --name ${CONTAINER_NAME} \
-                    -v pytest_code:/usr/local/lib/python3.11/site-packages \
-                    -v webdriver_cache:/root/.wdm \
-                    -v pytest_browser:/root/.cache/ms-playwright \
-                    -v $(pwd)/allure-results:${WORKDIR}/allure-results \
-                    --shm-size=2g
-                    ${IMAGE_NAME} \
-                    pytest -v -s --alluredir=${WORKDIR}/allure-results || true
+                  -v pytest_code:/usr/local/lib/python3.11/site-packages \
+                  -v webdriver_cache:/root/.wdm \
+                  -v pytest_browser:/root/.cache/ms-playwright \
+                  -v $(pwd)/allure-results:/app/allure-results \
+                  --shm-size=2g \
+                  ${IMAGE_NAME} \
+                  pytest -v -s --alluredir=/app/allure-results || true
                   # The '|| true' ensures the stage completes even if tests fail, so Allure report still generated
                 '''
             }
