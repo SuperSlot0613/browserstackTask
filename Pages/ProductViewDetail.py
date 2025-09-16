@@ -72,7 +72,8 @@ class ProductViewDetail:
                 f"Actual: User is getting {disc_text}"
             )
         except AssertionError as e:
-            error.append(f'Expected : User Should able to see Discounted percentage Actual : User is getting {str(discounte_percentage.text).replace('-', '')}')
+            disc_text = str(discounte_percentage.text).replace('-', '')
+            error.append(f'Expected : User Should able to see Discounted percentage Actual : User is getting {disc_text}')
 
 
         if error:
