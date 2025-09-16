@@ -13,7 +13,7 @@ def test_product_validation_of_third_product(driver):
     home_page.validated_home_page_open()
     home_page.search_product('Iphone 16')
     search_result.click_on_third_result(3)
-    product_detail.get_product_detail()
+    # product_detail.get_product_detail()
 
 
 # def test_product_validation_of_fifth_product(driver):

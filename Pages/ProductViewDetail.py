@@ -66,7 +66,11 @@ class ProductViewDetail:
         print('This is discounted percentage', str(discounte_percentage.text).replace('-', ''))
 
         try:
-            assert str(discounte_percentage.text)!='',f'Expected : User Should able to see Discounted percentage Actual : User is getting {str(discounte_percentage.text).replace('-', '')}'
+            disc_text = str(discounte_percentage.text).replace('-', '')
+            assert disc_text != '', (
+                f"Expected: User should be able to see Discounted percentage. "
+                f"Actual: User is getting {disc_text}"
+            )
         except AssertionError as e:
             error.append(f'Expected : User Should able to see Discounted percentage Actual : User is getting {str(discounte_percentage.text).replace('-', '')}')
 
