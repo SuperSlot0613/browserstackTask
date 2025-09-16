@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'BowserStackTask'
-        CONTAINER_NAME = 'BowserStackTask_container'
+        IMAGE_NAME = 'browserstacktask'
+        CONTAINER_NAME = 'browserstacktask_container'
         PATH = "/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
     }
 
