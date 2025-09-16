@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'BowserStackTask'
         CONTAINER_NAME = 'BowserStackTask_container'
+        PATH = "/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
     }
 
     stages {
