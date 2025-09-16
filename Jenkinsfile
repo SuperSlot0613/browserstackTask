@@ -28,6 +28,7 @@ pipeline {
 
                   # Run container with volume mounts
                   docker run --name ${CONTAINER_NAME} \
+                    -p 8081:8080 -p 50000:50000 \
                     -v python_deps:/usr/local/lib/python3.11/site-packages \
                     -v playwright_browsers:/root/.cache/ms-playwright \
                     ${IMAGE_NAME} \

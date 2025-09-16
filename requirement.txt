@@ -1,0 +1,9 @@
+pytest
+selenium
+requests
+pandas
+openpyxl
+urllib3
+yamlreader
+ujson
+
