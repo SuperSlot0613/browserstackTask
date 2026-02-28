@@ -1,39 +1,44 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 import allure
 
+
 class HomePage:
 
-    def __init__(self,driver : WebDriver):
-        self.driver=driver
-        self.wait=WebDriverWait(driver,15)
-        self.actions=ActionChains(driver)
+    def __init__(self, driver: WebDriver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 15)
 
-
-    #This method used for to search the product
-    def search_product(self,product_name):
-
-        mobile_dropdown = self.wait.until(
+    # This method is used to search for a product
+    def search_product(self, product_name):
+        search_box = self.wait.until(
             ec.visibility_of_element_located((By.XPATH, '//input[@placeholder="Search Amazon.in"]')))
-        mobile_dropdown.send_keys(product_name)
-        time.sleep(2)
-        mobile_dropdown.send_keys(Keys.DOWN+Keys.ENTER)
+        search_box.send_keys(product_name)
+        search_box.send_keys(Keys.ENTER)
 
-        result_name=self.wait.until(ec.visibility_of_element_located((By.XPATH,'(//div[@role="listitem"]//h2//span)[1]')))
+        result_name = self.wait.until(
+            ec.visibility_of_element_located((By.XPATH, '(//div[@role="listitem"]//h2//span)[1]')))
 
-        if 'iphone' in str(result_name.text).lower():
-            with allure.step(f"Expected : The result should come for this Product {product_name} Actual : The result is coming for Some other Product {str(result_name.text)}"):
-                assert True
+        result_text = str(result_name.text).lower()
+        search_terms = product_name.strip().lower().split()
+        assert search_terms, f"Product name must not be empty"
+        search_term = search_terms[0]
 
-    #This method is used for to check the Chrome is open or not
+        with allure.step(f"Verify search results contain '{product_name}'"):
+            assert search_term in result_text, (
+                f"Expected: Results for '{product_name}'. "
+                f"Actual: Got '{result_name.text}'"
+            )
+
+    # This method is used to verify the home page is loaded
     def validated_home_page_open(self):
-        home_page_text=self.wait.until(ec.presence_of_element_located((By.XPATH,'//div[@class="nav-line-1-container"]//span')))
-        if 'Hello, sign in'==home_page_text.text:
-            with allure.step("User Successfully able to login"):
-                assert True
+        home_page_text = self.wait.until(
+            ec.presence_of_element_located((By.XPATH, '//div[@class="nav-line-1-container"]//span')))
+        with allure.step("Verify Amazon home page is loaded"):
+            assert home_page_text.text != '', (
+                f"Expected: Home page text to be present. "
+                f"Actual: Got empty text"
+            )
