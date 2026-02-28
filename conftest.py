@@ -3,9 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 
-#This Method is used for to send Driver Object to test method
 @pytest.fixture
 def driver():
+    """Set up and tear down the Chrome WebDriver for each test."""
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
@@ -16,5 +16,4 @@ def driver():
     driver.implicitly_wait(10)
     driver.get('https://www.amazon.in/')
     yield driver
-    driver.close()
-
+    driver.quit()

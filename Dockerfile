@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /BowserStackTask
+WORKDIR /BrowserStackTask
 
 RUN apt-get update && apt-get install -y \
     wget curl unzip git ca-certificates libcairo2 \
@@ -12,11 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# ✅ Copy pre-downloaded browsers
-#COPY --from=browsers /root/.cache/ms-playwright /root/.cache/ms-playwright
-
 COPY . .
-ENV PYTHONPATH=/BowserStackTask
+ENV PYTHONPATH=/BrowserStackTask
 
 CMD ["pytest", "-v", "-s", "--alluredir=allure-results"]
-#CMD ["bash", "-c", "playwright install chromium --with-deps && python CC_Script/MainPy.py"]
