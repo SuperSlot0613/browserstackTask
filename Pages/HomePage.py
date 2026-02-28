@@ -23,7 +23,9 @@ class HomePage:
             ec.visibility_of_element_located((By.XPATH, '(//div[@role="listitem"]//h2//span)[1]')))
 
         result_text = str(result_name.text).lower()
-        search_term = product_name.lower().split()[0]
+        search_terms = product_name.strip().lower().split()
+        assert search_terms, f"Product name must not be empty"
+        search_term = search_terms[0]
 
         with allure.step(f"Verify search results contain '{product_name}'"):
             assert search_term in result_text, (
@@ -36,7 +38,7 @@ class HomePage:
         home_page_text = self.wait.until(
             ec.presence_of_element_located((By.XPATH, '//div[@class="nav-line-1-container"]//span')))
         with allure.step("Verify Amazon home page is loaded"):
-            assert home_page_text.text is not None, (
+            assert home_page_text.text != '', (
                 f"Expected: Home page text to be present. "
-                f"Actual: Got '{home_page_text.text}'"
+                f"Actual: Got empty text"
             )
